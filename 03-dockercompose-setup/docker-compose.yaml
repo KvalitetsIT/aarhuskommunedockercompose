@@ -1,0 +1,32 @@
+services:
+  webserver:
+    image: nginxinc/nginx-unprivileged:1.27-perl
+    networks:
+      - dcsetup
+    ports:
+      - 443:8443
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootroot
+      - MYSQL_DATABASE=users
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=1234
+    volumes:
+      - ./nginx/server.cert:/etc/server.cert
+      - ./nginx/server.key:/etc/server.key
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  hej:
+    image: nginxinc/nginx-unprivileged:1.27-perl
+    networks:
+      - dcsetup
+    volumes:
+      - ./nginx/hej.html:/usr/share/nginx/html/index.html
+  test:
+    image: nginxinc/nginx-unprivileged:1.27-perl
+    networks:
+      - dcsetup
+    volumes:
+      - ./nginx/test.html:/usr/share/nginx/html/index.html
+networks:
+  # To create this run: docker network create dcsetup
+  dcsetup:
+    external: true
