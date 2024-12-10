@@ -39,7 +39,7 @@ Web serveren har en portmapping, så vi kan tilgå den fra hostmaskinen på port
 * Tilgå følgende URL'er i en browser (man får en warning fordi man bruger et self-signed certifikat - man kan tilføje det som et trustet certifikat i browseren, hvis man er træt af det)
   * https://test.msbapi.adm.aarhuskommune.dk/ (giver en side, der siger noget med test - loggen skulle gerne afsløre, at den korrekte backend er i sving)
   * https://hej.msbapi.adm.aarhuskommune.dk/ (som ovenfor bare med den anden backend)
-  * https://ny.msbapi.adm.aarhuskommune.dk/ (giver en fejlside, da der ikke findes en backend med navnet ny, der kan betjene requestet)
+  * https://ny.msbapi.adm.aarhuskommune.dk/ (giver en fejlside fra webserveren, da der ikke findes en backend med navnet 'ny', der kan betjene requestet)
 
 
 # Prøv selv
