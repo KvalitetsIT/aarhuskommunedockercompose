@@ -6,10 +6,7 @@ services:
     ports:
       - 443:8443
     environment:
-      - MYSQL_ROOT_PASSWORD=rootroot
-      - MYSQL_DATABASE=users
-      - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=1234
+      - UPDATE=test
     volumes:
       - ./nginx/server.cert:/etc/server.cert
       - ./nginx/server.key:/etc/server.key

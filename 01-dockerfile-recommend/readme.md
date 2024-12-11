@@ -15,6 +15,8 @@ Overordnet vil kriterierne falde i to overordnede kategorier:
 * God at drifte
 * Højt niveau af sikkerhed
 
+Vi har i KIT lavet en template (godtnok for java, men principperne er de samme) som man kan se på: https://github.com/KvalitetsIT/kithugs
+
 ## Hvad gør et Docker image godt at drifte?
 Her er et par punkter, som du skal overveje:
 * Statelessness: Tilstand skal i database eller andet struktureret datastore. Containere kan opstå og dø på alle tænkelige tidspunkter, så lad være med at gemme filer inden i din container (visse drift miljøer vil faktisk ikke give dig mulighed for dette).
@@ -29,14 +31,16 @@ Mange vil nok sætte lighedtegn mellem god og sikker. En del sikkerhed relaterer
 
 Vi har taget de relevante (for udviklerne) rules her og beskrevet dem:
 
-###RULE#9 of RULE#13
+### RULE2
+Du skal sætte en bruger (så du ikke kører som ROOT): https://github.com/KvalitetsIT/kithugs/blob/984275856f03582136ffbd63c38c108c9632c341/web/docker/Dockerfile#L20C1-L20C11
+
+### RULE3
+Du skal (helst) kunne leve med begrænsede privilegier. Det er som sådan noget, der sker på drifttidspunktet, men det er godt at tjekke, at din service kan overleve dette.
+
+### RULE8
+Du skal (helst) kunne leve med read-only filsystem. Det er som sådan noget, der sker på drifttidspunktet, men det er godt at tjekke, at din service kan overleve dette.
+
+### RULE9 og RULE13
 Et godt udgangspunkt is less-is-more: Dit image skal indeholde det mindste, der er nødvendigt. Vælg en så lille base image som muligt og tilføj så lidt som muligt for at begrænse angrebsfladen. Hvis du har brug for en compiler, så benyt dig af multistage builds, hvor du har flere faser (f.eks. et image, der bruges til at bygge kode med, og et andet image, der brugs ved afvikling).
-Scan dine images regelmæssigt og sørg for regelmæssig opdatering, så du er på forkant med 
+Scan dine images regelmæssigt og sørg for regelmæssig opdatering, så du følger med patches osv.
 
-
-
-# Checkliste
-
-* Hvad er mit baseimage? Kan jeg finde noget mindre? Findes nyere versioner?
-* Hvad tilføjer jeg selv til? Er det nødvendigt?
-* 
